@@ -92,6 +92,11 @@ async def log_requests(request: Request, call_next):
         raise e
 
 
+origins = [
+    "https://edugrade-frontend.onrender.com",  # Link FE Render của ông
+    "http://localhost",
+    "*",  # Cho phép tất cả (dùng cách này nếu muốn nhanh nhất để test)
+]
 # CORS Middleware - Cho phép Flutter app kết nối
 app.add_middleware(
     CORSMiddleware,
