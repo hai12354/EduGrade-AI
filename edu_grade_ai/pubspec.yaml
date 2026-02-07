@@ -1,0 +1,49 @@
+name: edu_grade_ai
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.10.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Firebase
+  firebase_core: ^3.3.0
+  firebase_auth: ^5.1.3
+  cloud_firestore: ^5.2.1
+
+  # File Handling (PDF, Word & Excel)
+  file_picker: ^8.0.0
+  syncfusion_flutter_pdf: ^26.1.35
+  docx_to_text: ^1.0.1
+  excel: ^4.0.0
+  path_provider: ^2.1.0
+  share_plus: ^10.1.0
+
+  # ĐA NỀN TẢNG (Web & Mobile)
+  universal_html: ^2.2.4       # <--- THÊM MỚI: Để fix lỗi tải file trên Web
+
+  # AI Integration
+  google_generative_ai: ^0.4.0
+  flutter_dotenv: ^5.1.0
+  http: ^1.2.0
+  
+  # Utils
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/background.png

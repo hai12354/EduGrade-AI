@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "794720308594",
+    "project_id": "edugrade-ai-4a07f",
+    "storage_bucket": "edugrade-ai-4a07f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794720308594:android:eca4d8774bf65eee76a1eb",
+        "android_client_info": {
+          "package_name": "com.example.edu_grade_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDdXI1hBNJHKTAPkn477bziwTboZpYN7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,15 @@
+# General
+.DS_Store
+.vscode/
+.idea/
+
+# Backend Secrets
+BE/.env
+BE/serviceAccountKey.json
+BE/serviceAccountKey.txt
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+# Deloy xong chạy lệnh này mở server
+.\run_app.bat

@@ -1,0 +1,44 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Hàm kiểm tra role
+    function hasRole(role) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == role;
+    }
+
+    // Rules cho collection users
+    // Cho phép đọc để đăng nhập và create để đăng ký (không qua Firebase Auth)
+    match /users/{userId} {
+      allow read: if true;  // Cho phép đọc công khai để query đăng nhập
+      allow create: if true;  // Cho phép tạo tài khoản mới (signup)
+      allow update, delete: if request.auth != null && (request.auth.uid == userId || hasRole('admin'));
+    }
+
+    // Rules cho collection classes
+    match /classes/{classId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && hasRole('admin');
+    }
+
+    // Rules cho collection settings
+    match /settings/{settingId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && hasRole('admin');
+    }
+
+    // Rules cho collection exams
+    match /exams/{examId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (hasRole('admin') || hasRole('teacher'));
+    }
+
+    // Rules cho collection exam_results
+    match /exam_results/{resultId} {
+      allow read: if request.auth != null && (request.auth.uid == resource.data.studentId || hasRole('admin') || hasRole('teacher'));
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null && (hasRole('admin') || hasRole('teacher'));
+    }
+  }
+}
