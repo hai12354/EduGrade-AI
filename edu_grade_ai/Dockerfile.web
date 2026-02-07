@@ -1,24 +1,21 @@
-# Stage 1: Build Flutter Web
-FROM ubuntu:22.04 AS build-env
+# Stage 1: Build Flutter Web dùng Image có sẵn cho nhẹ
+FROM ghcr.io/cirruslabs/flutter:stable AS build-env
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    curl git wget zip unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback \
-    && apt-get clean
-
-# Setup Flutter
-ENV FLUTTER_HOME=/opt/flutter
-RUN git clone https://github.com/flutter/flutter.git $FLUTTER_HOME
-ENV PATH=$PATH:$FLUTTER_HOME/bin
-
-# Build the Web app
 WORKDIR /app
-COPY . .
+# Copy pubspec trước để cache layer (tăng tốc build)
+COPY pubspec.* ./
 RUN flutter pub get
+
+# Copy toàn bộ code và build
+COPY . .
 RUN flutter build web --release
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
+# Copy kết quả build vào thư mục của Nginx
 COPY --from=build-env /app/build/web /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+# KHÔNG DÙNG EXPOSE 80 (Render tự quản lý port)
+
+# Lệnh khởi chạy Nginx và ép nó nghe theo biến $PORT của Render
+CMD ["sh", "-c", "sed -i 's/listen 80;/listen '\"$PORT\"';/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
