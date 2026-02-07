@@ -3,9 +3,9 @@ EduGrade AI - Python Backend
 FastAPI server với Multi-Fallback AI (Gemini → Grok → OpenAI)
 """
 
-from fastapi import FastAPI, Request, JSONResponse  # Thêm JSONResponse vào đây
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse  # Hoặc viết riêng một dòng như này cho chắc
 from dotenv import load_dotenv
 import os
 
