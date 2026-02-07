@@ -12,15 +12,22 @@ class ApiService {
       "192.168.1.5"; // Change to your server IP if needed
 
   String get baseUrl {
+    // Tất cả các môi trường đều phải trỏ về link Render kèm /api
+    const String prodUrl = "https://edugrade-ai.onrender.com/api";
+
     if (kIsWeb) {
-      // Thay vì dùng "/api", ông dán trực tiếp link BE Render vào đây
-      return "https://edugrade-ai.onrender.com";
+      return prodUrl;
     }
+
     try {
-      if (Platform.isAndroid) return "https://edugrade-ai.onrender.com";
-      if (Platform.isIOS) return "https://edugrade-ai.onrender.com";
-    } catch (e) {}
-    return "https://edugrade-ai.onrender.com";
+      if (Platform.isAndroid || Platform.isIOS) {
+        return prodUrl;
+      }
+    } catch (e) {
+      // Tránh lỗi khi chạy trên các nền tảng không hỗ trợ dart:io
+    }
+
+    return prodUrl;
   }
 
   Map<String, String> get headers => {
