@@ -13,3 +13,4 @@ BE/serviceAccountKey.txt
 docker-compose.override.yml
 # Deloy xong chạy lệnh này mở server
 .\run_app.bat
+nginx.conf
