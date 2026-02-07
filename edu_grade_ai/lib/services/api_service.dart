@@ -13,16 +13,14 @@ class ApiService {
 
   String get baseUrl {
     if (kIsWeb) {
-      // For Web, use relative path if served from the same domain
-      // Or change to your production URL
-      return "/api";
+      // Thay vì dùng "/api", ông dán trực tiếp link BE Render vào đây
+      return "https://edugrade-ai.onrender.com";
     }
     try {
-      if (Platform.isAndroid)
-        return "http://10.0.2.2/api"; // Port 80 for Gateway
-      if (Platform.isIOS) return "http://localhost/api";
+      if (Platform.isAndroid) return "https://edugrade-ai.onrender.com";
+      if (Platform.isIOS) return "https://edugrade-ai.onrender.com";
     } catch (e) {}
-    return "http://$_pcIp/api";
+    return "https://edugrade-ai.onrender.com";
   }
 
   Map<String, String> get headers => {
